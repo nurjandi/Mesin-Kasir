@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ceabae09-6c9e-44af-b8a5-1f6e215150d8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Year" class="java.lang.String"/>
+	<parameter name="Month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     rekap_penjualan.`kode_barang` AS rekap_penjualan_kode_barang,
+     rekap_penjualan.`nama_barang` AS rekap_penjualan_nama_barang,
+     rekap_penjualan.`barang_terjual` AS rekap_penjualan_barang_terjual,
+     rekap_penjualan.`barang_kadaluarsa` AS rekap_penjualan_barang_kadaluarsa,
+     rekap_penjualan.`profit` AS rekap_penjualan_profit,
+     rekap_penjualan.`loss` AS rekap_penjualan_loss,
+     rekap_penjualan.`Tanggal_Terjual` AS rekap_penjualan_Tanggal_Terjual
+FROM
+     `rekap_penjualan` rekap_penjualan
+WHERE YEAR(rekap_penjualan.`Tanggal_Terjual`) = $P{Year}  AND MONTH(rekap_penjualan.`Tanggal_Terjual`) = $P{Month}]]>
+	</queryString>
+	<field name="rekap_penjualan_kode_barang" class="java.lang.String"/>
+	<field name="rekap_penjualan_nama_barang" class="java.lang.String"/>
+	<field name="rekap_penjualan_barang_terjual" class="java.lang.Integer"/>
+	<field name="rekap_penjualan_barang_kadaluarsa" class="java.lang.Integer"/>
+	<field name="rekap_penjualan_profit" class="java.lang.Float"/>
+	<field name="rekap_penjualan_loss" class="java.lang.Float"/>
+	<field name="rekap_penjualan_Tanggal_Terjual" class="java.sql.Timestamp"/>
+	<variable name="rekap_penjualan_kode_barang_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{rekap_penjualan_kode_barang}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="203" y="15" width="103" height="20" uuid="3ff59c6e-230c-4b16-bca3-e51ca8d0fd56"/>
+				<text><![CDATA[LAPORAN BULANAN ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="47" width="165" height="20" uuid="484a1a1c-4e62-4a88-b79a-d66649ae0b3c"/>
+				<text><![CDATA[PENJUALAN BARANG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="464" y="15" width="100" height="20" uuid="8bd13850-aae9-4709-91b2-bba32117d027"/>
+				<textFieldExpression><![CDATA[ new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="416" y="15" width="48" height="20" uuid="3e6fd8bb-f450-4589-9ca8-675414aa110b"/>
+				<text><![CDATA[Bandung,]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="44" width="100" height="20" uuid="4b1a56e9-c456-4fa8-8fc0-9d9c48468a25"/>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="44" width="90" height="20" uuid="51a8ec41-b112-4ffd-8770-3bdec4ea0ef0"/>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="44" width="79" height="20" uuid="9a04c672-e125-4127-8c1a-b9eafd730231"/>
+				<text><![CDATA[Terjual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="44" width="61" height="20" uuid="312985b6-eec8-485e-86bc-95be2753e644"/>
+				<text><![CDATA[Kadaluarsa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="44" width="67" height="20" uuid="ab22affe-f542-412a-a569-37cc57f5aedb"/>
+				<text><![CDATA[profit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="44" width="68" height="20" uuid="d6eef856-73f8-40bd-a4cc-4d7ec820ad81"/>
+				<text><![CDATA[Loss]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="44" width="100" height="20" uuid="d75c3ed7-8d44-46fc-a087-6472ac27af14"/>
+				<text><![CDATA[Tgl]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="90" y="0" width="100" height="20" uuid="91efeb82-07c3-418b-b221-6e0d9c6e5c66"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="79" height="20" uuid="5106af48-760c-423d-8586-18b617083ad7"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_barang_terjual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="61" height="20" uuid="72829b4b-fff5-4f16-9f83-f5554cacb602"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_barang_kadaluarsa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="67" height="20" uuid="2b520f83-3e4a-48e3-ad3c-8b70f93c88ac"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_profit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="90" height="20" uuid="25a52f41-e85c-41d9-806c-2a1468546f98"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_kode_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="68" height="20" uuid="a4f021f6-8733-412a-b47f-c90708d9b139"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_loss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="100" height="20" uuid="c8ebb0d2-ad7d-4570-9846-9ffc34b9e506"/>
+				<textFieldExpression><![CDATA[$F{rekap_penjualan_Tanggal_Terjual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
